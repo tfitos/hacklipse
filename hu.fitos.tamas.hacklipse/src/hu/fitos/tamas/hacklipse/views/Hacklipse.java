@@ -10,6 +10,8 @@ import hu.fitos.tamas.hacklipse.mvc.HEventBus;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -41,6 +43,7 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
+import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
@@ -78,12 +81,8 @@ public class Hacklipse extends ViewPart {
 	private Action action1;
 	private Action action2;
 	
-	private HEventBus eventBus;
 	private HackerModel model;
 	private IHackViewListener listener;
-	
-	
-
 	
 	
 	public void setListener(IHackViewListener listener){
@@ -94,7 +93,7 @@ public class Hacklipse extends ViewPart {
 	 * The constructor.
 	 */
 	public Hacklipse() {
-		System.out.println("!!! CONSTRUCTOR");
+		Activator.getDefault().getLog().log(new Status(IStatus.OK, Activator.PLUGIN_ID, "constructor"));
 	}
 	
 	
@@ -102,12 +101,7 @@ public class Hacklipse extends ViewPart {
 		this.model = model;
 	}
 	
-	public void setEventBus(HEventBus eventBus) {
-		this.eventBus = eventBus;
-	}
-	
 	public void updateTable(){
-		
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setInput(model.getHackerElems());
 		
@@ -148,11 +142,11 @@ public class Hacklipse extends ViewPart {
 	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
-		System.out.println("!!! INIT");
+		Activator.getDefault().getLog().log(new Status(IStatus.OK, Activator.PLUGIN_ID, "Init"));
 	}
 	
 	public void createPartControl(Composite parent) {
-		System.out.println("!!! CREATEPARTCONTROL");
+		Activator.getDefault().getLog().log(new Status(IStatus.OK, Activator.PLUGIN_ID, "createPartControl"));
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		build();
 		new HacklipseController(this);
@@ -189,7 +183,7 @@ public class Hacklipse extends ViewPart {
 	@Override
 	public void dispose() {
 		super.dispose();
-		System.out.println("!!! DISPOSE");
+		Activator.getDefault().getLog().log(new Status(IStatus.OK, Activator.PLUGIN_ID, "Dispose"));
 	}
 	
 	public void bind(){
@@ -205,9 +199,9 @@ public class Hacklipse extends ViewPart {
 		try {
 			browserSupport.getExternalBrowser().openURL(new URL(url));
 		} catch (PartInitException e) {
-			e.printStackTrace();
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 		}
 	}
 

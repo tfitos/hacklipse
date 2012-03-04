@@ -11,13 +11,7 @@ import hu.fitos.tamas.hacklipse.service.HackerNewsRetriever;
 import hu.fitos.tamas.hacklipse.views.Hacklipse;
 import hu.fitos.tamas.hacklipse.views.IHackViewListener;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 
 public class HacklipseController implements IHackViewListener{
 
@@ -38,7 +32,6 @@ public class HacklipseController implements IHackViewListener{
 		modelService.setHackerModel(model);
 		modelService.setEventBus(eventBus);
 		view.setModel(model);
-		view.setEventBus(eventBus);
 		view.setListener(this);
 		view.bind();
 		bind();

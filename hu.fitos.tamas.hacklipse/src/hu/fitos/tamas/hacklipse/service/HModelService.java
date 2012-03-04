@@ -1,5 +1,6 @@
 package hu.fitos.tamas.hacklipse.service;
 
+import hu.fitos.tamas.hacklipse.Activator;
 import hu.fitos.tamas.hacklipse.events.HModelChangedEvent;
 import hu.fitos.tamas.hacklipse.events.HModelChangedEvent.HModelChangedEventType;
 import hu.fitos.tamas.hacklipse.model.HackerElem;
@@ -50,6 +51,7 @@ public class HModelService {
 					hackerModel.setHackerElems(list);
 					eventBus.fireEvent(new HModelChangedEvent(HModelChangedEventType.RETRIEVED));
 				}catch(final IOException e){
+					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 					HModelChangedEvent event = new HModelChangedEvent(HModelChangedEventType.RETRIEVE_FAILED);
 					event.setReason(e.getMessage());
 					eventBus.fireEvent(event);
