@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Hacklipse"
+            id="hu.fitos.tamas.hacklipse">
+      </category>
+      <view
+            name="Hacklipse"
+            icon="icons/hacklipse.gif"
+            category="hu.fitos.tamas.hacklipse"
+            class="hu.fitos.tamas.hacklipse.views.Hacklipse"
+            id="hu.fitos.tamas.hacklipse.views.Hacklipse">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="hu.fitos.tamas.hacklipse.views.Hacklipse">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>
