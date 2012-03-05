@@ -76,9 +76,23 @@ public class HacklipseController implements IHackViewListener{
 	}
 	
 	@Override
-	public void doubleClicked(HackerElem elem) {
+	public void titleDoubleClicked(HackerElem elem) {
 		if(elem != null && elem.getUrl() != null){
 			view.openExternalBrowser(elem.getUrl());
+		}
+	}
+	
+	@Override
+	public void commentsDoubleClicked(HackerElem elem) {
+		if(elem != null && elem.getUrl() != null){
+			view.openExternalBrowser(elem.getCommentUrl());
+		}
+	}
+	
+	@Override
+	public void userDoubleClicked(HackerElem elem) {
+		if(elem != null && elem.getUrl() != null){
+			view.openExternalBrowser(elem.getUserUrl());
 		}
 	}
 	

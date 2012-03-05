@@ -13,10 +13,12 @@ import org.jsoup.select.Elements;
 
 public class HackerNewsRetriever implements IHRetriever{
 	
+	private static final String BASEURL = "http://news.ycombinator.com";
+	
 	public List<HackerElem> retrieve() throws IOException{
 		
 		List<HackerElem> hackerElems = new ArrayList<HackerElem>();
-		Document doc = Jsoup.connect("http://news.ycombinator.com").get();
+		Document doc = Jsoup.connect(BASEURL).get();
 		Elements elements = doc.select(".title");
 		int i = 1;
 		for(Element element : elements){
@@ -31,6 +33,18 @@ public class HackerNewsRetriever implements IHRetriever{
 					hackerElem.setTitle(a.text());
 					hackerElem.setUrl(a.attr("href"));
 					hackerElem.setDomain(element.select("span").text());
+					
+					Elements userAndcommentAs = element.parent().nextElementSibling().select(".subtext > a");
+					if(userAndcommentAs != null && userAndcommentAs.size() == 2){
+						Element userA = userAndcommentAs.get(0);
+						hackerElem.setUsername(userA.text());
+						hackerElem.setUserUrl(BASEURL + "/" + userA.attr("href"));
+						
+						Element commentA = userAndcommentAs.get(1);
+						hackerElem.setComment(commentA.text());
+						hackerElem.setCommentUrl(BASEURL + "/" + commentA.attr("href"));
+					}
+					
 					hackerElems.add(hackerElem);
 					i++;
 				}

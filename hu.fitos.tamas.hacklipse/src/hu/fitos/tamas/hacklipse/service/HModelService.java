@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.swt.widgets.Display;
 
 public class HModelService {
 	
@@ -50,6 +49,7 @@ public class HModelService {
 					List<HackerElem> list = retriever.retrieve();
 					hackerModel.setHackerElems(list);
 					eventBus.fireEvent(new HModelChangedEvent(HModelChangedEventType.RETRIEVED));
+					//throw new IOException("AAA");
 				}catch(final IOException e){
 					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 					HModelChangedEvent event = new HModelChangedEvent(HModelChangedEventType.RETRIEVE_FAILED);

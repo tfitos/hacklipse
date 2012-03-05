@@ -4,7 +4,11 @@ import hu.fitos.tamas.hacklipse.model.HackerElem;
 
 public interface IHackViewListener {
 	
-	void doubleClicked(HackerElem elem);
+	void titleDoubleClicked(HackerElem elem);
+	
+	void commentsDoubleClicked(HackerElem elem);
+	
+	void userDoubleClicked(HackerElem elem);
 	
 	void refreshPushed();
 	
