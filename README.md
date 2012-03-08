@@ -7,7 +7,7 @@ Update site: [http://tamas.fitos.hu/hacklipse]
 
 In action
 ---------
-![](http://github.com/tfitos/hacklipse/raw/master/images/hacklipse_screenshot.png)
+![](http://github.com/tfitos/hacklipse/raw/master/images/hacklipse_screenshot_crop.png)
 
 Usage:
 
